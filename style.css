@@ -14,7 +14,7 @@ body {
     border-radius: 23px;
     margin: 16px;
     padding: 20px;
-    background-color: lightgray;
+    background-color: rgb(128, 126, 126);
     flex-wrap: wrap;
     font-weight: bolder;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -45,7 +45,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 600px;
+    min-height: 600px;
     width: 350px;
     flex-wrap: wrap;
     margin: auto;
