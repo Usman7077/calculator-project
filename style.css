@@ -3,6 +3,7 @@ body {
     align-items: center;
     justify-content: center;
     background-color: rgb(59, 53, 53);
+    height: 100vh;
 }
 
 #results {
@@ -24,6 +25,7 @@ body {
 #lowerDisplay {
     display: flex;
     flex-wrap: wrap;
+    background-color: aqua;
     min-height: 30px;
     width: 274px;
     size: 20px;
@@ -35,6 +37,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     min-height: 40px;
+    background-color: yellow;
     width: 274px;
     font-size: large;
 
