@@ -1,18 +1,15 @@
 let strGen = "";
-let a = 0;
+let a;
 let ans;
 let b;
 let dot = 0;
 let clicked = 0;
 
-function showResult(NumStr, display) {
-    strGen += NumStr;
-    let ll = document.getElementById(display);
-    ll.innerText = strGen;
-}
 document.getElementById('add')
     .addEventListener('click', function () {
         clicked++;
+        operator = "+";
+        b = "";
         if (strGen == "") strGen = "0";
         if (clicked == 1) {
             operator = "+";
@@ -28,6 +25,40 @@ document.getElementById('add')
             a = ans;
         }
         strGen = "";
+    });
+document.getElementById('equal')
+    .addEventListener('click', function () {
+        // if (strGen == "") strGen = "0";
+        if (b == undefined) a = strGen; //don't calculate until b value is assigned.
+        else {
+            b = strGen;
+            let totStr = `${a} ${operator} ${b} =`;
+            document.getElementById('upperDisplay').innerText = totStr;
+            ans = calculate(a, b, operator);
+            document.getElementById('lowerDisplay').innerText = ans;
+            // a = ans;
+            // strGen = "";
+            dot = 0;
+        }
+    });
+document.getElementById('clear')
+    .addEventListener('click', function () {
+        strGen = "";
+        document.getElementById('upperDisplay').innerText = strGen;
+        document.getElementById('lowerDisplay').innerText = 0;
+        strGen = "";
+        ans = undefined;
+        b = undefined;
+        dot = 0;
+        clicked = 0;
+    });
+document.getElementById('delete')
+    .addEventListener('click', function () {
+        let v = "" + strGen;
+        strGen = "";
+        if (v.substring(v.length - 1, v.length) == ".") dot = 0;
+        v = v.substring(0, v.length - 1);
+        document.getElementById('lowerDisplay').innerText = v;
     });
 document.getElementById('multiply')
     .addEventListener('click', function () {
@@ -86,90 +117,68 @@ document.getElementById('divide')
         }
         strGen = "";
     });
-document.getElementById('equal')
-    .addEventListener('click', function () {
-        if (strGen == "") strGen = "0";
-        b = strGen;
-        let totStr = `${a} ${operator} ${b} =`;
-        document.getElementById('upperDisplay').innerText = totStr;
-        ans = calculate(a, b, operator);
-        document.getElementById('lowerDisplay').innerText = ans;
-        // a = ans;
-        // strGen = "";
-        dot = 0;
-        // clicked=0;
-    });
-document.getElementById('clear')
-    .addEventListener('click', function () {
-        strGen = "";
-        showResult(strGen, 'upperDisplay');
-        showResult(0, 'lowerDisplay');
-        strGen = "";
-        ans = undefined;
-        b = undefined;
-        dot = 0;
-        clicked = 0;
-    });
-
-document.getElementById('delete')
-    .addEventListener('click', function () {
-        let v = "" + strGen;
-        strGen = "";
-        if (v.substring(v.length - 1, v.length) == ".") dot = 0;
-        v = v.substring(0, v.length - 1);
-        showResult(v, 'lowerDisplay');
-    });
-
 
 document.getElementById('1')
-    .addEventListener('click', function (e) {
-        showResult(1, "lowerDisplay");
+    .addEventListener('click', function () {
+        strGen += 1;
+        document.getElementById('lowerDisplay').innerText = strGen;
     });
 document.getElementById('2')
-    .addEventListener('click', function (e) {
-        showResult(2, "lowerDisplay");
+    .addEventListener('click', function () {
+        strGen += 2;
+        document.getElementById('lowerDisplay').innerText = strGen;
     });
 document.getElementById('3')
-    .addEventListener('click', function (e) {
-        showResult(3, "lowerDisplay");
+    .addEventListener('click', function () {
+        strGen += 3;
+        document.getElementById('lowerDisplay').innerText = strGen;
     });
 document.getElementById('4')
-    .addEventListener('click', function (e) {
-        showResult(4, "lowerDisplay");
+    .addEventListener('click', function () {
+        strGen += 4;
+        document.getElementById('lowerDisplay').innerText = strGen;
     });
 document.getElementById('5')
-    .addEventListener('click', function (e) {
-        showResult(5, "lowerDisplay");
+    .addEventListener('click', function () {
+        strGen += 5;
+        document.getElementById('lowerDisplay').innerText = strGen;
     });
 document.getElementById('6')
-    .addEventListener('click', function (e) {
-        showResult(6, "lowerDisplay");
+    .addEventListener('click', function () {
+        strGen += 6;
+        document.getElementById('lowerDisplay').innerText = strGen;
     });
 document.getElementById('7')
-    .addEventListener('click', function (e) {
-        showResult(7, "lowerDisplay");
+    .addEventListener('click', function () {
+        strGen += 7;
+        document.getElementById('lowerDisplay').innerText = strGen;
     });
 document.getElementById('8')
-    .addEventListener('click', function (e) {
-        showResult(8, "lowerDisplay");
+    .addEventListener('click', function () {
+        strGen += 8;
+        document.getElementById('lowerDisplay').innerText = strGen;
     });
 document.getElementById('9')
-    .addEventListener('click', function (e) {
-        showResult(9, "lowerDisplay");
+    .addEventListener('click', function () {
+        strGen += 9;
+        document.getElementById('lowerDisplay').innerText = strGen;
     });
 document.getElementById('0')
-    .addEventListener('click', function (e) {
-        showResult(0, "lowerDisplay");
+    .addEventListener('click', function () {
+        strGen += 0;
+        document.getElementById('lowerDisplay').innerText = strGen;
     });
 document.addEventListener('keypress', function (e) {
     console.log(e)
 });
 document.getElementById('.')
-    .addEventListener('click', function (e) {
+    .addEventListener('click', function () {
         dot++;
         if (dot == 1) {
-            showResult(".", "lowerDisplay");
+            strGen += ".";
+            document.getElementById('lowerDisplay').innerText = strGen;
         }
+
     });
 const calculate = function (a, b, operator) {
     b = +b;
