@@ -4,11 +4,12 @@ let ans;
 let b;
 let dot = 0;
 let clicked = 0;
+let operator="";
 
 document.getElementById('add')
     .addEventListener('click', function () {
         clicked++;
-        operator = "+";
+        // operator = "+";
         b = "";
         if (strGen == "") strGen = "0";
         if (clicked == 1) {
@@ -36,6 +37,7 @@ document.getElementById('equal')
             document.getElementById('upperDisplay').innerText = totStr;
             ans = calculate(a, b, operator);
             document.getElementById('lowerDisplay').innerText = ans;
+            clicked=0;
             // a = ans;
             // strGen = "";
             dot = 0;
@@ -63,11 +65,13 @@ document.getElementById('delete')
 document.getElementById('multiply')
     .addEventListener('click', function () {
         clicked++;
+        // operator = "*";
+        b = "";
         if (strGen == "") strGen = "0";
         if (clicked == 1) {
             operator = "*";
             a = strGen;
-            showResult(' x ', 'upperDisplay');
+            document.getElementById('upperDisplay').innerText = `${a} ${operator} `;
         }
         else {
             b = strGen;
@@ -82,11 +86,13 @@ document.getElementById('multiply')
 document.getElementById('subtract')
     .addEventListener('click', function () {
         clicked++;
+        // operator = "-";
+        b = "";
         if (strGen == "") strGen = "0";
         if (clicked == 1) {
             operator = "-";
             a = strGen;
-            showResult(' - ', 'upperDisplay');
+            document.getElementById('upperDisplay').innerText = `${a} ${operator} `;
         }
         else {
             b = strGen;
@@ -101,11 +107,13 @@ document.getElementById('subtract')
 document.getElementById('divide')
     .addEventListener('click', function () {
         clicked++;
+        // operator = "/";
+        b = "";
         if (strGen == "") strGen = "0";
         if (clicked == 1) {
             operator = "/";
             a = strGen;
-            showResult(' / ', 'upperDisplay');
+            document.getElementById('upperDisplay').innerText = `${a} ${operator} `;
         }
         else {
             b = strGen;
