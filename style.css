@@ -19,7 +19,7 @@ body{
     border-style: solid;
     border-radius: 23px;
     margin: 16px;
-    padding: 20px;
+    padding: 6px;
     background-color: var(--display-color);
     flex-wrap: wrap;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -28,6 +28,7 @@ body{
     word-wrap: break-word;
     word-break: break-all;
     font-size: 35px;
+    flex-direction: column;
 }
 
 .lowerDisplay {
@@ -36,10 +37,11 @@ body{
     --display-color: rgb(128, 126, 126);
     background-color: ;
     min-height: 30px;
-    width: 274px;
+    /* width: 274px; */
     size: 20px;
     /* font-size: large; */
     justify-content: flex-end;
+    flex-grow: 1;
 }
 
 .upperDisplay {
@@ -48,8 +50,9 @@ body{
     min-height: 40px;
     --display-color: rgb(128, 126, 126);
     background-color: ;
-    width: 274px;
-    /* font-size: large; */
+    /* width: 274px; */
+    font-size: 22px;
+    flex-grow: 1;
 
 }
 
@@ -58,7 +61,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 600px;
+    min-height: auto;
     width: 350px;
     flex-wrap: wrap;
     margin: auto;
