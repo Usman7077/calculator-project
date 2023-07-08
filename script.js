@@ -4,16 +4,60 @@ let ans;
 let b;
 let dot = 0;
 let clicked = 0;
-let operator="";
+let operator = "";
 
-document.getElementById('add')
-    .addEventListener('click', function () {
+document.getElementById('0').addEventListener('click', () => lowerDisplay('0'));
+document.getElementById('1').addEventListener('click', () => lowerDisplay('1'));
+document.getElementById('2').addEventListener('click', () => lowerDisplay('2'));
+document.getElementById('3').addEventListener('click', () => lowerDisplay('3'));
+document.getElementById('4').addEventListener('click', () => lowerDisplay('4'));
+document.getElementById('5').addEventListener('click', () => lowerDisplay('5'));
+document.getElementById('6').addEventListener('click', () => lowerDisplay('6'));
+document.getElementById('7').addEventListener('click', () => lowerDisplay('7'));
+document.getElementById('8').addEventListener('click', () => lowerDisplay('8'));
+document.getElementById('9').addEventListener('click', () => lowerDisplay('9'));
+document.getElementById('.').addEventListener('click', () => lowerDisplay('.'));
+document.getElementById('add').addEventListener('click', () => subt("+"));
+document.getElementById('multiply').addEventListener('click', () => subt("*"));
+document.getElementById('divide').addEventListener('click', () => subt("/"));
+document.getElementById('subtract').addEventListener('click', () => subt("-"));
+document.getElementById('equal').addEventListener('click', () => equal());
+document.getElementById('delete').addEventListener('click', () => del());
+document.getElementById('clear').addEventListener('click', () => clear());
+
+window.addEventListener("keydown", (event) => {
+    if (event.key >= "0" && event.key <= "9" || event.key == ".") lowerDisplay(event.key);
+    else if (event.key == "*" || event.key == "/" || event.key == "+" || event.key == "-") subt(event.key);
+    else if (event.key == "Enter" || event.key == "=") equal();
+    else if (event.key == "Backspace") del();
+});
+
+function lowerDisplay(str) {
+    if (str == ".") {
+        dot++;
+        if (dot == 1) {
+            strGen += str;
+            document.getElementById('lowerDisplay').innerText = strGen;
+        }
+    }
+    else {
+        strGen += str;
+        document.getElementById('lowerDisplay').innerText = strGen;
+    }
+}
+
+function subt(op) {
+    if (strGen == "" && a == undefined) { }
+    else if (strGen == "") {
+        operator = op;
+        document.getElementById('upperDisplay').innerText = `${a} ${operator} `;
+    }
+    else {
         clicked++;
-        // operator = "+";
         b = "";
         if (strGen == "") strGen = "0";
         if (clicked == 1) {
-            operator = "+";
+            operator = op;
             a = strGen;
             document.getElementById('upperDisplay').innerText = `${a} ${operator} `;
         }
@@ -21,15 +65,17 @@ document.getElementById('add')
             b = strGen;
             ans = calculate(a, b, operator);
             document.getElementById('lowerDisplay').innerText = ans;
-            operator = "+";
+            operator = op;
             document.getElementById('upperDisplay').innerText = `${ans} ${operator} `;
             a = ans;
         }
         strGen = "";
-    });
-document.getElementById('equal')
-    .addEventListener('click', function () {
-        // if (strGen == "") strGen = "0";
+    }
+}
+
+function equal() {
+    if (strGen == "") { }
+    else {
         if (b == undefined) a = strGen; //don't calculate until b value is assigned.
         else {
             b = strGen;
@@ -37,157 +83,30 @@ document.getElementById('equal')
             document.getElementById('upperDisplay').innerText = totStr;
             ans = calculate(a, b, operator);
             document.getElementById('lowerDisplay').innerText = ans;
-            clicked=0;
-            // a = ans;
-            // strGen = "";
             dot = 0;
         }
-    });
-document.getElementById('clear')
-    .addEventListener('click', function () {
-        strGen = "";
-        document.getElementById('upperDisplay').innerText = strGen;
-        document.getElementById('lowerDisplay').innerText = 0;
-        strGen = "";
-        ans = undefined;
-        b = undefined;
-        dot = 0;
-        clicked = 0;
-    });
-document.getElementById('delete')
-    .addEventListener('click', function () {
-        let v = "" + strGen;
-        strGen = "";
-        if (v.substring(v.length - 1, v.length) == ".") dot = 0;
-        v = v.substring(0, v.length - 1);
-        document.getElementById('lowerDisplay').innerText = v;
-    });
-document.getElementById('multiply')
-    .addEventListener('click', function () {
-        clicked++;
-        // operator = "*";
-        b = "";
-        if (strGen == "") strGen = "0";
-        if (clicked == 1) {
-            operator = "*";
-            a = strGen;
-            document.getElementById('upperDisplay').innerText = `${a} ${operator} `;
-        }
-        else {
-            b = strGen;
-            ans = calculate(a, b, operator);
-            document.getElementById('lowerDisplay').innerText = ans;
-            operator = "*";
-            document.getElementById('upperDisplay').innerText = `${ans} ${operator} `;
-            a = ans;
-        }
-        strGen = "";
-    });
-document.getElementById('subtract')
-    .addEventListener('click', function () {
-        clicked++;
-        // operator = "-";
-        b = "";
-        if (strGen == "") strGen = "0";
-        if (clicked == 1) {
-            operator = "-";
-            a = strGen;
-            document.getElementById('upperDisplay').innerText = `${a} ${operator} `;
-        }
-        else {
-            b = strGen;
-            ans = calculate(a, b, operator);
-            document.getElementById('lowerDisplay').innerText = ans;
-            operator = "-";
-            document.getElementById('upperDisplay').innerText = `${ans} ${operator} `;
-            a = ans;
-        }
-        strGen = "";
-    });
-document.getElementById('divide')
-    .addEventListener('click', function () {
-        clicked++;
-        // operator = "/";
-        b = "";
-        if (strGen == "") strGen = "0";
-        if (clicked == 1) {
-            operator = "/";
-            a = strGen;
-            document.getElementById('upperDisplay').innerText = `${a} ${operator} `;
-        }
-        else {
-            b = strGen;
-            ans = calculate(a, b, operator);
-            document.getElementById('lowerDisplay').innerText = ans;
-            operator = "/";
-            document.getElementById('upperDisplay').innerText = `${ans} ${operator} `;
-            a = ans;
-        }
-        strGen = "";
-    });
+    }
+}
 
-document.getElementById('1')
-    .addEventListener('click', function () {
-        strGen += 1;
-        document.getElementById('lowerDisplay').innerText = strGen;
-    });
-document.getElementById('2')
-    .addEventListener('click', function () {
-        strGen += 2;
-        document.getElementById('lowerDisplay').innerText = strGen;
-    });
-document.getElementById('3')
-    .addEventListener('click', function () {
-        strGen += 3;
-        document.getElementById('lowerDisplay').innerText = strGen;
-    });
-document.getElementById('4')
-    .addEventListener('click', function () {
-        strGen += 4;
-        document.getElementById('lowerDisplay').innerText = strGen;
-    });
-document.getElementById('5')
-    .addEventListener('click', function () {
-        strGen += 5;
-        document.getElementById('lowerDisplay').innerText = strGen;
-    });
-document.getElementById('6')
-    .addEventListener('click', function () {
-        strGen += 6;
-        document.getElementById('lowerDisplay').innerText = strGen;
-    });
-document.getElementById('7')
-    .addEventListener('click', function () {
-        strGen += 7;
-        document.getElementById('lowerDisplay').innerText = strGen;
-    });
-document.getElementById('8')
-    .addEventListener('click', function () {
-        strGen += 8;
-        document.getElementById('lowerDisplay').innerText = strGen;
-    });
-document.getElementById('9')
-    .addEventListener('click', function () {
-        strGen += 9;
-        document.getElementById('lowerDisplay').innerText = strGen;
-    });
-document.getElementById('0')
-    .addEventListener('click', function () {
-        strGen += 0;
-        document.getElementById('lowerDisplay').innerText = strGen;
-    });
-document.addEventListener('keypress', function (e) {
-    console.log(e)
-});
-document.getElementById('.')
-    .addEventListener('click', function () {
-        dot++;
-        if (dot == 1) {
-            strGen += ".";
-            document.getElementById('lowerDisplay').innerText = strGen;
-        }
+function del() {
+    let v;
+    v = "" + strGen;
+    if (v.substring(v.length - 1, v.length) == ".") dot = 0;
+    strGen = v.substring(0, v.length - 1);
+    document.getElementById('lowerDisplay').innerText = strGen;
+}
 
-    });
+function clear() {
+    strGen = "";
+    document.getElementById('upperDisplay').innerText = strGen;
+    document.getElementById('lowerDisplay').innerText = 0;
+    a = undefined;
+    ans = undefined;
+    b = undefined;
+    dot = 0;
+    clicked = 0;
+}
+
 const calculate = function (a, b, operator) {
     b = +b;
     a = +a;
@@ -200,9 +119,5 @@ const add = (a, b) => a + b;
 const subtract = (a, b) => a - b;
 const multiply = (a, b) => a * b;
 const divide = (a, b) => a / b;
-// document.getElementById("buttons").addEventListener('click', function (e) {
-//     console.log(e.target.id);
-//     p = e.target.id;
-//     showResult(p, "lowerDisplay")
-// })
 
+window.addEventListener("keydown", (event) => console.log(event.key));
