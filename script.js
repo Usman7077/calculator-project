@@ -63,10 +63,12 @@ function subt(op) {
         }
         else {
             b = strGen;
+
             ans = calculate(a, b, operator);
             document.getElementById('lowerDisplay').innerText = ans;
             operator = op;
-            document.getElementById('upperDisplay').innerText = `${ans} ${operator} `;
+            if (ans == "Cal Error!") {document.getElementById('upperDisplay').innerText = ``;}
+            else {document.getElementById('upperDisplay').innerText = `${ans} ${operator} `;}
             a = ans;
         }
         strGen = "";
@@ -110,7 +112,8 @@ function clear() {
 const calculate = function (a, b, operator) {
     b = +b;
     a = +a;
-    if (operator == '+') return add(a, b);
+    if (operator == "/" && b == 0) return "Cal Error!";
+    else if (operator == '+') return add(a, b);
     else if (operator == '-') return subtract(a, b);
     else if (operator == '*') return multiply(a, b);
     else if (operator == '/') return divide(a, b);
